@@ -18,14 +18,18 @@ class Employee:
     def sal_raise (self):
         self.pay = (self.pay*self.raise_amt)
 
+    @classmethod
+    def set_emp_raise(cls,amount):
+        cls.raise_amt = amount
+
 
 
 
 emp = Employee('joseph','mutua',120000)
+emp.set_emp_raise(1.05)
 
-print (emp.email)
-print (emp.fullname())
-print (emp.pay)
+print (emp.raise_amt)
+
 
 
     
