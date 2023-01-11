@@ -10,11 +10,28 @@ class Employee:
         self.first = first
         self.last= last
         self.pay = pay
-        self.email = first + '.' + last + '@gmail.com'
+        
 
+    @property
+    def email (self):
+        return '{}.{}@gmail.com' .format(self.first,self.last)
+
+    @property
     def fullname (self):
         return '{} {}'.format(self.first, self.last)
     
+    @fullname.setter
+    def fullname(self, name):
+        first, last = name.split(' ')
+        self.first = first
+        self.last = last
+
+    @fullname.deleter
+    def fullname(self):
+        print ("Employee Deleted")
+        self.first = None
+        self.last = None
+
     def apply_raise (self):
         self.pay = (self.pay*self.raise_amt)
 
@@ -28,6 +45,9 @@ class Employee:
             return False
         else:
             return True
+    def __repr__(self):
+
+        return "Employee('{}','{}','{}')".format(self.first,self.last, self.pay)
     
 
 #Create a subclass that inheretes attributes from the employee class
@@ -60,13 +80,16 @@ class Manager (Employee):
 
     def print_employees(self):
         for emp in self.employees:
-            print('-->', emp.fullname())
+            print('-->', emp.fullname)
 
         
 
 
-emp = Developer('joseph','mutua',120000, 'Python')
+emp = Employee('joseph','mutua',120000)
 emp_1 = Developer('joe','Jane',120000, 'Jave')
+emp.last = "James"
+
+print(emp.email)
 emp.set_emp_raise(1.05)
 print(emp.pay)
 emp.apply_raise()
@@ -80,7 +103,11 @@ mrg1.print_employees()
 mrg1.add_employee(emp_1)
 
 mrg1.print_employees()
+print (emp_1)
 
+emp.fullname = "Jose John"
 
+print (emp.first)
+print (emp.last)
 
     
